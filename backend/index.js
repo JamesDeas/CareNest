@@ -15,7 +15,10 @@ dotenv.config();
 const app = express();
 
 app.use(cors({
-  origin: '*',
+  origin: [
+    'http://localhost:5173',
+    'https://aesthetic-maamoul-2fef70.netlify.app'
+  ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
@@ -23,14 +26,15 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Enable pre-flight requests for all routes
-app.options('*', cors());
-
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/jobs', jobRoutes);
 app.use('/api/applications', applicationRoutes);
 app.use('/api/saved-jobs', savedJobRoutes);
+
+app.get('/api/test', (req, res) => {
+  res.json({ message: 'API is working' });
+});
 
 const PORT = process.env.PORT || 5001;
 
@@ -68,3 +72,6 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 if (!fs.existsSync('uploads')) {
     fs.mkdirSync('uploads');
 }
+
+// Enable pre-flight requests for all routes
+app.options('*', cors());
