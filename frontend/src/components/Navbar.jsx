@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useState } from 'react';
+import logoRed from '../assets/elements/logo-red.png';
+import logoWhite from '../assets/elements/logo-white.png';
 
 function Navbar() {
     const { user, logout } = useAuth();
@@ -14,7 +16,7 @@ function Navbar() {
                     <div className="flex">
                         <Link to="/" className="flex-shrink-0 flex items-center">
                             <img 
-                                src="/elements/logo-red.png"
+                                src={logoRed}
                                 alt="CareNest"
                                 className="h-8 w-auto"
                             />

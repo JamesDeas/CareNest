@@ -17,13 +17,17 @@ const app = express();
 app.use(cors({
   origin: [
     'http://localhost:5173',
-    'https://aesthetic-maamoul-2fef70.netlify.app', // Add your Netlify domain
-    // Add any other allowed origins
+    'https://aesthetic-maamoul-2fef70.netlify.app'
   ],
-  credentials: true
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Add this before your routes
+app.options('*', cors()); // Enable pre-flight for all routes
 
 // Routes
 app.use('/api/auth', authRoutes);
