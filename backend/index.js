@@ -17,7 +17,7 @@ const app = express();
 app.use(cors({
   origin: [
     'http://localhost:5173',
-    'https://carenest-jobsite.netlify.app', // Add your Netlify domain
+    'https://aesthetic-maamoul-2fef70.netlify.app', // Add your Netlify domain
     // Add any other allowed origins
   ],
   credentials: true

@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: carenest-jobsite-backend
+    name: CareNest
     env: node
     buildCommand: npm install
     startCommand: node index.js
