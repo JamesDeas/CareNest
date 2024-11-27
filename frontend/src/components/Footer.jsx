@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from '../context/AuthContext';
+import logoWhite from '../assets/elements/logo-white.png';
 
 const Footer = () => {
     const { user } = useAuth();
@@ -12,7 +13,7 @@ const Footer = () => {
                     <div>
                         <h3 className="text-lg font-semibold mb-4">
                             <img 
-                                src="/elements/logo-white.png"
+                                src={logoWhite}
                                 alt="CareNest"
                                 className="h-8 w-auto mb-2"
                             />
@@ -86,7 +87,7 @@ const Footer = () => {
                     <div>
                         <h3 className="text-lg font-semibold mb-4">
                             <img 
-                                src="/elements/logo-white.png"
+                                src={logoWhite}
                                 alt="CareNest"
                                 className="h-8 w-auto mb-2"
                             />
@@ -160,7 +161,7 @@ const Footer = () => {
                 <div>
                     <h3 className="text-lg font-semibold mb-4">
                         <img 
-                            src="/elements/logo-white.png"
+                            src={logoWhite}
                             alt="CareNest"
                             className="h-8 w-auto mb-2"
                         />

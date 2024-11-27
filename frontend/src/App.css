@@ -43,8 +43,12 @@
 
 .bg-image {
   background-image: url('./assets/elements/bg.jpg');
+  background-size: cover;
+  background-position: center;
 }
 
 .bg-image-2 {
   background-image: url('./assets/elements/bg-2.jpg');
+  background-size: cover;
+  background-position: center;
 }
