@@ -20,7 +20,7 @@ const UpdateJob = () => {
   useEffect(() => {
     const fetchJobDetails = async () => {
       try {
-        const response = await fetch(`http://localhost:5001/jobs/${id}`);
+        const response = await fetch(`https://carenest-6cf6.onrender.com/jobs/${id}`);
         if (!response.ok) throw new Error("Failed to fetch job details");
 
         const jobData = await response.json();
@@ -47,7 +47,7 @@ const UpdateJob = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch(`http://localhost:5001/jobs/${id}`, {
+      const response = await fetch(`https://carenest-6cf6.onrender.com/jobs/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
