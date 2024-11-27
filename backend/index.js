@@ -14,7 +14,14 @@ dotenv.config();
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:5173',
+    'https://carenest-jobsite.netlify.app', // Add your Netlify domain
+    // Add any other allowed origins
+  ],
+  credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -26,11 +33,8 @@ app.use('/api/saved-jobs', savedJobRoutes);
 
 const PORT = process.env.PORT || 5001;
 
-// Construct MongoDB URI
-const MONGODB_URI = 'mongodb+srv://job-admin:james@cluster0.6fkey.mongodb.net/jobsite?retryWrites=true&w=majority';
-
 // MongoDB connection
-mongoose.connect(MONGODB_URI)
+mongoose.connect(process.env.MONGODB_URI)
 .then(async () => {
     console.log('Connected to MongoDB');
     
