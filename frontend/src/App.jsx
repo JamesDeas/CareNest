@@ -14,6 +14,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Dashboard from './pages/Dashboard';
 import EditJob from './pages/EditJob';
 import AccountSettings from './pages/AccountSettings';
+import GDPR from './pages/GDPR';
 
 const App = () => (
   <AuthProvider>
@@ -43,6 +44,7 @@ const App = () => (
                 <AccountSettings />
               </ProtectedRoute>
             } />
+            <Route path="/gdpr" element={<GDPR />} />
           </Routes>
         </main>
         <Footer />

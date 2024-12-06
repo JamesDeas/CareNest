@@ -14,6 +14,7 @@ function Register() {
     });
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+    const [consent, setConsent] = useState(false);
 
     const handleChange = (e) => {
         setFormData({
@@ -22,10 +23,20 @@ function Register() {
         });
     };
 
+    const handleConsentChange = (e) => {
+        setConsent(e.target.checked);
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
         setLoading(true);
+
+        if (!consent) {
+            setError('You must agree to the GDPR policy to register.');
+            setLoading(false);
+            return;
+        }
 
         try {
             console.log('Sending registration request:', formData);
@@ -122,6 +133,21 @@ function Register() {
                                 <option value="jobseeker">Job Seeker</option>
                                 <option value="employer">Employer</option>
                             </select>
+                        </div>
+
+                        <div className="flex items-center">
+                            <input
+                                id="consent"
+                                name="consent"
+                                type="checkbox"
+                                required
+                                className="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded"
+                                checked={consent}
+                                onChange={handleConsentChange}
+                            />
+                            <label htmlFor="consent" className="ml-2 block text-sm text-gray-900">
+                                I agree to the <a href="/gdpr" className="text-red-600 hover:text-red-500">GDPR policy</a>.
+                            </label>
                         </div>
 
                         <button

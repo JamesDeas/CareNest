@@ -77,6 +77,16 @@ const Footer = () => {
                             </li>
                         </ul>
                     </div>
+                    <div>
+                        <h3 className="text-lg font-semibold mb-4">Legal</h3>
+                        <ul className="space-y-2 text-sm">
+                            <li>
+                                <Link to="/gdpr" className="text-gray-300 hover:text-[#c92f42] transition-colors">
+                                    GDPR Information
+                                </Link>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             );
         }
@@ -151,6 +161,16 @@ const Footer = () => {
                             </li>
                         </ul>
                     </div>
+                    <div>
+                        <h3 className="text-lg font-semibold mb-4">Legal</h3>
+                        <ul className="space-y-2 text-sm">
+                            <li>
+                                <Link to="/gdpr" className="text-gray-300 hover:text-[#c92f42] transition-colors">
+                                    GDPR Information
+                                </Link>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             );
         }
@@ -222,6 +242,16 @@ const Footer = () => {
                         </li>
                         <li className="text-gray-300">
                             Hours: 24/7 Support
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 className="text-lg font-semibold mb-4">Legal</h3>
+                    <ul className="space-y-2 text-sm">
+                        <li>
+                            <Link to="/gdpr" className="text-gray-300 hover:text-[#c92f42] transition-colors">
+                                GDPR Information
+                            </Link>
                         </li>
                     </ul>
                 </div>
