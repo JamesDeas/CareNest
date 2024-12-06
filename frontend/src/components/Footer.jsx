@@ -85,6 +85,11 @@ const Footer = () => {
                                     GDPR Information
                                 </Link>
                             </li>
+                            <li>
+                                <Link to="/about" className="text-gray-300 hover:text-[#c92f42] transition-colors">
+                                    About Us
+                                </Link>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -169,6 +174,11 @@ const Footer = () => {
                                     GDPR Information
                                 </Link>
                             </li>
+                            <li>
+                                <Link to="/about" className="text-gray-300 hover:text-[#c92f42] transition-colors">
+                                    About Us
+                                </Link>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -251,6 +261,11 @@ const Footer = () => {
                         <li>
                             <Link to="/gdpr" className="text-gray-300 hover:text-[#c92f42] transition-colors">
                                 GDPR Information
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/about" className="text-gray-300 hover:text-[#c92f42] transition-colors">
+                                About Us
                             </Link>
                         </li>
                     </ul>

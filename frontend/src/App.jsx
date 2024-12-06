@@ -16,6 +16,7 @@ import EditJob from './pages/EditJob';
 import AccountSettings from './pages/AccountSettings';
 import GDPR from './pages/GDPR';
 import AdminDashboard from './pages/AdminDashboard';
+import About from './pages/About';
 
 const App = () => (
   <AuthProvider>
@@ -51,6 +52,7 @@ const App = () => (
                 <AdminDashboard />
               </ProtectedRoute>
             } />
+            <Route path="/about" element={<About />} />
           </Routes>
         </main>
         <Footer />
