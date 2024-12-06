@@ -15,6 +15,7 @@ import Dashboard from './pages/Dashboard';
 import EditJob from './pages/EditJob';
 import AccountSettings from './pages/AccountSettings';
 import GDPR from './pages/GDPR';
+import AdminDashboard from './pages/AdminDashboard';
 
 const App = () => (
   <AuthProvider>
@@ -45,6 +46,11 @@ const App = () => (
               </ProtectedRoute>
             } />
             <Route path="/gdpr" element={<GDPR />} />
+            <Route path="/admin" element={
+              <ProtectedRoute adminOnly>
+                <AdminDashboard />
+              </ProtectedRoute>
+            } />
           </Routes>
         </main>
         <Footer />

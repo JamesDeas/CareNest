@@ -12,14 +12,36 @@ function Dashboard() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [savedJobs, setSavedJobs] = useState([]);
+    const [adminUsers, setAdminUsers] = useState([]);
+    const [adminJobs, setAdminJobs] = useState([]);
 
     useEffect(() => {
-        if (user.role === 'employer') {
+        if (user.role === 'admin') {
+            fetchAdminData();
+        } else if (user.role === 'employer') {
             fetchEmployerData();
         } else {
             fetchJobSeekerData();
         }
     }, [user]);
+
+    const fetchAdminData = async () => {
+        try {
+            const [usersResponse, jobsResponse] = await Promise.all([
+                api.get('/admin/all-users'),
+                api.get('/admin/all-jobs')
+            ]);
+            console.log('Users Response:', usersResponse.data);
+            console.log('Jobs Response:', jobsResponse.data);
+            setAdminUsers(usersResponse.data);
+            setAdminJobs(jobsResponse.data);
+        } catch (err) {
+            console.error('Error fetching admin data:', err);
+            setError('Failed to load admin data');
+        } finally {
+            setLoading(false);
+        }
+    };
 
     const fetchEmployerData = async () => {
         try {
@@ -40,8 +62,6 @@ function Dashboard() {
             setLoading(false);
         }
     };
-
-    console.log('Current jobs:', jobs);
 
     const fetchJobSeekerData = async () => {
         try {
@@ -129,6 +149,26 @@ function Dashboard() {
         }
     };
 
+    const deleteUser = async (userId) => {
+        try {
+            await api.delete(`/admin/users/${userId}`); // Adjust the endpoint as needed
+            setAdminUsers(adminUsers.filter(user => user._id !== userId)); // Update state
+        } catch (err) {
+            console.error('Error deleting user:', err);
+            setError('Failed to delete user');
+        }
+    };
+
+    const deleteJob = async (jobId) => {
+        try {
+            await api.delete(`/admin/jobs/${jobId}`); // Adjust the endpoint as needed
+            setAdminJobs(adminJobs.filter(job => job._id !== jobId)); // Update state
+        } catch (err) {
+            console.error('Error deleting job:', err);
+            setError('Failed to delete job');
+        }
+    };
+
     return (
         <div className="bg-gray-50">
             {/* Hero Section */}
@@ -165,7 +205,84 @@ function Dashboard() {
 
             {/* Main Content */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 pb-8">
-                {user.role === 'employer' ? (
+                {user.role === 'admin' ? (
+                    // Admin View
+                    <>
+                        <h2 className="text-2xl font-medium text-red-950 mb-6">Admin Dashboard</h2>
+                        <h3 className="text-xl font-medium text-red-950 mb-4">Users</h3>
+                        <div className="overflow-x-auto">
+                            <table className="min-w-full bg-white border border-gray-200">
+                                <thead>
+                                    <tr className="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
+                                        <th className="py-3 px-6 text-left">Name</th>
+                                        <th className="py-3 px-6 text-left">Email</th>
+                                        <th className="py-3 px-6 text-left">Role</th>
+                                        <th className="py-3 px-6 text-left">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody className="text-gray-600 text-sm font-light">
+                                    {adminUsers.length > 0 ? (
+                                        adminUsers.map(user => (
+                                            <tr key={user._id} className="border-b border-gray-200 hover:bg-gray-100">
+                                                <td className="py-3 px-6">{user.name}</td>
+                                                <td className="py-3 px-6">{user.email}</td>
+                                                <td className="py-3 px-6">{user.role}</td>
+                                                <td className="py-3 px-6">
+                                                    <button
+                                                        onClick={() => deleteUser(user._id)}
+                                                        className="text-red-600 hover:text-red-800"
+                                                    >
+                                                        Delete
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        ))
+                                    ) : (
+                                        <tr>
+                                            <td colSpan="4" className="py-3 px-6 text-center">No users found</td>
+                                        </tr>
+                                    )}
+                                </tbody>
+                            </table>
+                        </div>
+                        <h3 className="text-xl font-medium text-red-950 mb-4">Jobs</h3>
+                        <div className="overflow-x-auto">
+                            <table className="min-w-full bg-white border border-gray-200">
+                                <thead>
+                                    <tr className="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
+                                        <th className="py-3 px-6 text-left">Title</th>
+                                        <th className="py-3 px-6 text-left">Company</th>
+                                        <th className="py-3 px-6 text-left">Location</th>
+                                        <th className="py-3 px-6 text-left">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody className="text-gray-600 text-sm font-light">
+                                    {adminJobs.length > 0 ? (
+                                        adminJobs.map(job => (
+                                            <tr key={job._id} className="border-b border-gray-200 hover:bg-gray-100">
+                                                <td className="py-3 px-6">{job.title}</td>
+                                                <td className="py-3 px-6">{job.company}</td>
+                                                <td className="py-3 px-6">{job.location}</td>
+                                                <td className="py-3 px-6">
+                                                    <button
+                                                        onClick={() => deleteJob(job._id)}
+                                                        className="text-red-600 hover:text-red-800"
+                                                    >
+                                                        Delete
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        ))
+                                    ) : (
+                                        <tr>
+                                            <td colSpan="4" className="py-3 px-6 text-center">No jobs found</td>
+                                        </tr>
+                                    )}
+                                </tbody>
+                            </table>
+                        </div>
+                    </>
+                ) : user.role === 'employer' ? (
                     // Employer View
                     <>
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">

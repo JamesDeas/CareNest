@@ -6,6 +6,7 @@ import authRoutes from './routes/auth.js';
 import jobRoutes from './routes/jobs.js';
 import applicationRoutes from './routes/applications.js';
 import savedJobRoutes from './routes/savedJobs.js';
+import adminRoutes from './routes/admin.js'; // Import the admin routes
 import path from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
@@ -31,6 +32,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/jobs', jobRoutes);
 app.use('/api/applications', applicationRoutes);
 app.use('/api/saved-jobs', savedJobRoutes);
+app.use('/api/admin', adminRoutes);
 
 app.get('/api/test', (req, res) => {
   res.json({ message: 'API is working' });
